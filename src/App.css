@@ -1,7 +1,10 @@
 .App {
   text-align: center;
+  width: 98vw;
+  height: 98vh;
+  margin: 1vh;
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +38,89 @@
   to {
     transform: rotate(360deg);
   }
+} */
+/* contains calander and search button */
+.Dates {
+display: flex;
+justify-content: first baseline;
+align-items: center;
+}
+
+/* results */
+.Results {
+  display: flex;
+justify-content: first baseline;
+align-items: center;
+}
+
+/* No-email container */
+.NoEmails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* When there is emails how to arrange them */
+.Emails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+/* Each individual email */
+.Email {
+  border-bottom: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.EmailTitles {
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  width: 100%;
+  background-color: lightgrey;
+}
+#emailTitles:hover {
+  background-color: lightgrey;
+  color: black;
+  cursor: default;
+}
+.Title{
+  justify-content: space-evenly;
+}
+#title:hover{ 
+  background-color: orange;
+  color: green;
+  cursor: pointer;
+}
+
+.Search-Container {
+  width: 30px;
+  padding: 2px;
+  border: 1px solid red;
+  background-color: lightgrey;
+}
+ul {
+  width: 100%;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+ol {
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  width: 100%;
+    justify-content: space-around;
+}
+
+ol:hover {
+ color: rgb(15, 15, 255);
+ background-color: rgb(235, 235, 235);
+ cursor: pointer;
 }
