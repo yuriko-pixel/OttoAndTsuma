@@ -2,7 +2,7 @@ import "./App.css";
 import NoEmails from "./images/logo.png";
 import Search from "./images/icon_search.svg";
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 
 function App() {
   // compare the from and put them in order
@@ -43,7 +43,7 @@ function App() {
     return 0;
   }
   function compareDate(a, b) {
-    let ArrayA = a.date.split(' ').splice(1,4)
+    let ArrayA = a.date.split(" ").splice(1, 4);
     switch (ArrayA[0]) {
       case "Jan":
         ArrayA[0] = "01";
@@ -84,8 +84,8 @@ function App() {
       default:
         return;
     }
-    ArrayA = ArrayA.join(' ')
-    let ArrayB = b.date.split(' ').splice(1,4)
+    ArrayA = ArrayA.join(" ");
+    let ArrayB = b.date.split(" ").splice(1, 4);
     switch (ArrayB[0]) {
       case "Jan":
         ArrayB[0] = "01";
@@ -126,8 +126,8 @@ function App() {
       default:
         return;
     }
-    ArrayB = ArrayB.join(' ')
-    console.log(parseInt(ArrayB))
+    ArrayB = ArrayB.join(" ");
+    console.log(parseInt(ArrayB));
     if (ArrayA < ArrayB) {
       // console.log(emails[1].subject);
       return 1;
@@ -208,10 +208,9 @@ function App() {
 
   // end of date functions
   // Calender
-  const [value, onChange] = useState(new Date());
+  // const [value, onChange] = useState(new Date());
   // Emails
-  const [emails, setEmails] = useState([
-  ]);
+  const [emails, setEmails] = useState([]);
 
   // Emails Initial State
   const allEmails = [
@@ -254,10 +253,10 @@ function App() {
     for (let index = 0; index < allEmails.length; index++) {
       const WholeEmail = allEmails[index];
       const element = allEmails[index].date;
-      console.log(value, element);
+      // console.log(value, element);
       if (
         element.split(" ").splice(0, 4).join(" ") ===
-        value.toString().split(" ").splice(0, 4).join(" ")
+        calander.toString().split(" ").splice(0, 4).join(" ")
       ) {
         console.log("Match!");
         placeHolder.push(WholeEmail);
@@ -292,6 +291,14 @@ function App() {
     newArr.sort(compareDate);
     // console.log(newArr === emails);
     return newArr;
+  };
+
+  const [calander, setCalander] = useState(
+    "Sun Nov 01 2020 00:00:00 GMT+0900 (Japan Standard Time)"
+  );
+  const updateCalander = (e) => {
+    console.log(e.target.value);
+    setCalander(e.target.value);
   };
 
   function MessagesList({ value }) {
@@ -364,7 +371,13 @@ function App() {
             {/* reaplce input with calander input */}
             <div>
               {" "}
-              <Calendar onChange={onChange} value={value} />
+              {/* <Calendar onChange={onChange} value={value} /> */}
+              <input
+                className="search-bar"
+                type="text"
+                value={calander}
+                onChange={updateCalander}
+              />
             </div>
             <button className="Search-Container">
               <img className="Search" src={Search} alt="Search" type="submit" />
@@ -391,7 +404,13 @@ function App() {
             {/* reaplce input with calander input */}
             <div>
               {" "}
-              <Calendar onChange={onChange} value={value} />
+              {/* <Calendar onChange={onChange} value={value} /> */}
+              <input
+                className="search-bar"
+                type="text"
+                value={calander}
+                onChange={updateCalander}
+              />
             </div>
             <button className="Search-Container">
               <img className="Search" src={Search} alt="Search" type="submit" />
