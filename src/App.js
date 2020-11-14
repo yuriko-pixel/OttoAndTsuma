@@ -142,12 +142,12 @@ function App() {
   function convertToYYYMMDD (props) {
     props =  props.split(' ').splice(1,3)
     switchCases(props)
-    props[3] = props[2]
-    props[2] = props[1]
-    props[1] = props[0]
-    props[0] = props[3]
     props.splice(3)
-    return props.join(' ')
+    const newProps = ['YYYY','/','MM','/','DD']
+    newProps[0] = props[2]
+    newProps[2] = props[0]
+    newProps[4] = props[1]
+    return newProps.join('')
 }
 
 function switchCases (monthArray) {
@@ -336,27 +336,18 @@ function covertTonewDate (props) {
     const placeHolder = [];
     for (let index = 0; index < allEmails.length; index++) {
       const WholeEmail = allEmails[index];
-      const element = allEmails[index].date;
-      console.log()
-      const StartDate = calander
-      const EndDate = calander
-
-      // Delete below
-      const calanderYYYYMMDD = (covertTonewDate(calander))
-      console.log(calanderYYYYMMDD);
-      if (
-        element.split(" ").splice(0, 4).join(" ") ===
-        calanderYYYYMMDD.toString().split(" ").splice(0, 4).join(" ")
-      ) {
-        console.log("Match!");
-        placeHolder.push(WholeEmail);
+      const element = convertToYYYMMDD(allEmails[index].date);
+      const StartDate = calander.split(' ')[0]
+      const EndDate = calander.split(' ')[2]
+      if (element > StartDate && element < EndDate || element === EndDate) {
+          console.log('Match')
+          placeHolder.push(WholeEmail)
       } else {
-        console.log("No Match");
+        console.log('No Match')
       }
     }
-    console.log(allEmails);
-    setEmails(placeHolder);
-  };
+    setEmails(placeHolder)
+}
   const [calander, setCalander] = useState("1900/11/14 - 2020/11/14");
   const updateCalander = (e) => {
     console.log(e.target.value);
