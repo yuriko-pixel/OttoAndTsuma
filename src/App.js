@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 function App() {
   // compare the from and put them in order
   function compareFrom(a, b) {
+    changes = changes+1
     if (a.from < b.from) {
       console.log(emails[1].from);
       return -1;
@@ -65,7 +66,6 @@ function App() {
     return "Bob"
   }
   // end of date functions
-
   // Calender
   const [value, onChange] = useState(new Date());
   // Emails (With no server)
@@ -91,65 +91,56 @@ function App() {
   ]);
   // Display results (amount of emails)
   let resultsLength = emails.length;
+  let changes = 0;
   // Search function to look for emails from the dates
   const SearchClick = (e) => {
     e.preventDefault();
     console.log(value);
   };
-  let testing = [
-    {
-      from: "aaa@exmaple.com",
-      to: "zzz@example.com",
-      subject: "Second Email",
-      date: "Nov 13 2020 08:59:31",
-    },
-    {
-      from: "ddd@exmaple.com",
-      to: "eee@example.com",
-      subject: "Third Email",
-      date: changeTime(),
-    },
-    {
-      from: "bbb@exmaple.com",
-      to: "ccc@example.com",
-      subject: "First Email",
-      date: "Nov 12 2020 08:59:31",
-    },
-  ];
+
+  const emailArrReturn = (emails) => {
+    const newArr = emails.slice();
+    newArr.sort(compareFrom);
+    console.log(newArr===emails);
+    return newArr;
+  };
+
   function MessagesList ({value}) {
     let listEmails = value.map((items, index) => (
-      <ol className="EmailOL">
+      <ol className="EmailOL" key = {Math.random()}>
         <li
           className="Email"
-          key={items.from.toString()}
+          key={Math.random()}
           onClick={() => console.log(index)}
         >
           {items.from}
         </li>
-        <li className="Email" key={items.to.toString()}>
+        <li className="Email" key={Math.random()}>
           {items.to}
         </li>
-        <li className="Email" key={items.subject.toString()}>
+        <li className="Email" key={Math.random()}>
           {items.subject}
         </li>
-        <li className="Email" key={items.date.toString()}>
+        <li className="Email" key={Math.random()}>
           {items.date}
         </li>
       </ol>
     ));
     return (
-      <ul>
-        <ol className="EmailTitles" id="emailTitles" >
+      <ul key = {Math.random()}>
+        <ol className="EmailTitles" id="emailTitles" key = {Math.random()} >
           <li
-            key ="from"
+            key = {Math.random()}
             className="Title"
             id="title"
-            onClick={() => setEmails(emails.sort(compareFrom))}
+            // onClick={() => setEmails(emails.sort(compareFrom))}
+            // onClick={() => setEmails(emails.sort(compareFrom))}
+            onClick={() => setEmails(emailArrReturn(emails))}
           >
             From
           </li>
           <li
-          key ="to"
+         key = {Math.random()}
             className="Title"
             id="title"
             onClick={() => setEmails(emails.sort(compareTo))}
@@ -157,7 +148,7 @@ function App() {
             To
           </li>
           <li
-          key ="subject"
+          key = {Math.random()}
             className="Title"
             id="title"
             onClick={() => setEmails(emails.sort(compareSubject))}
@@ -165,7 +156,7 @@ function App() {
             Subject
           </li>
           <li
-          key ="date"
+          key = {Math.random()}
             className="Title"
             id="title"
             onClick={() => console.log("Date")}
@@ -177,6 +168,10 @@ function App() {
       </ul>
     );
   };
+
+  useEffect(() => {
+    console.log(emails[1].from)
+  }, [emails]);
   // Make a list of emails
   if (emails.length > 0) {
     return (
