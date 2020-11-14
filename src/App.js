@@ -139,6 +139,64 @@ function App() {
     return 0;
   }
 
+  function convertToYYYMMDD (props) {
+    props =  props.split(' ').splice(1,3)
+    switchCases(props)
+    props[3] = props[2]
+    props[2] = props[1]
+    props[1] = props[0]
+    props[0] = props[3]
+    props.splice(3)
+    return props.join(' ')
+}
+
+function switchCases (monthArray) {
+    switch (monthArray[0]) {
+        case "Jan":
+          monthArray[0] = "01";
+          break;
+        case "Feb":
+          monthArray[0] = "02";
+          break;
+        case "Mar":
+          monthArray[0] = "03";
+          break;
+        case "Apr":
+          monthArray[0] = "04";
+          break;
+        case "May":
+          monthArray[0] = "05";
+          break;
+        case "Jun":
+          monthArray[0] = "06";
+          break;
+        case "Jul":
+          monthArray[0] = "07";
+          break;
+        case "Aug":
+          monthArray[0] = "08";
+          break;
+        case "Sep":
+          monthArray[0] = "09";
+          break;
+        case "Oct":
+          monthArray[0] = "10";
+          break;
+        case "Nov":
+          monthArray[0] = "11";
+          break;
+        case "Dec":
+          monthArray[0] = "12";
+          break;
+        default:
+          return;
+      }
+}
+
+function covertTonewDate (props) {
+    return new Date(props)
+}
+
   // date functions
   // let fakeTime = "Fri Nov 13 2020 09:28:14 GMT+0900 (Japan Standard Time)";
   function calcDate(emailDate) {
@@ -247,26 +305,7 @@ function App() {
   let resultsLength = emails.length;
   let changes = 0;
   // Search function to look for emails from the dates
-  const SearchClick = (e) => {
-    e.preventDefault();
-    const placeHolder = [];
-    for (let index = 0; index < allEmails.length; index++) {
-      const WholeEmail = allEmails[index];
-      const element = allEmails[index].date;
-      // console.log(value, element);
-      if (
-        element.split(" ").splice(0, 4).join(" ") ===
-        calander.toString().split(" ").splice(0, 4).join(" ")
-      ) {
-        console.log("Match!");
-        placeHolder.push(WholeEmail);
-      } else {
-        console.log("No Match");
-      }
-    }
-    console.log(allEmails);
-    setEmails(placeHolder);
-  };
+
 
   const CompareFrom = (emails) => {
     const newArr = emails.slice();
@@ -292,10 +331,33 @@ function App() {
     // console.log(newArr === emails);
     return newArr;
   };
+  const SearchClick = (e) => {
+    e.preventDefault();
+    const placeHolder = [];
+    for (let index = 0; index < allEmails.length; index++) {
+      const WholeEmail = allEmails[index];
+      const element = allEmails[index].date;
+      console.log()
+      const StartDate = calander
+      const EndDate = calander
 
-  const [calander, setCalander] = useState(
-    "Sun Nov 01 2020 00:00:00 GMT+0900 (Japan Standard Time)"
-  );
+      // Delete below
+      const calanderYYYYMMDD = (covertTonewDate(calander))
+      console.log(calanderYYYYMMDD);
+      if (
+        element.split(" ").splice(0, 4).join(" ") ===
+        calanderYYYYMMDD.toString().split(" ").splice(0, 4).join(" ")
+      ) {
+        console.log("Match!");
+        placeHolder.push(WholeEmail);
+      } else {
+        console.log("No Match");
+      }
+    }
+    console.log(allEmails);
+    setEmails(placeHolder);
+  };
+  const [calander, setCalander] = useState("1900/11/14 - 2020/11/14");
   const updateCalander = (e) => {
     console.log(e.target.value);
     setCalander(e.target.value);
