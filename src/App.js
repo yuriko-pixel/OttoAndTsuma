@@ -43,15 +43,98 @@ function App() {
     return 0;
   }
   function compareDate(a, b) {
-    console.log(a.date)
-    const sortedActivities = emails.slice().sort((a, b) => b.date - a.date)
-    if (a.date < b.date) {
-      // console.log(emails[1].subject);
-      return -1;
+    let ArrayA = a.date.split(' ').splice(1,4)
+    switch (ArrayA[0]) {
+      case "Jan":
+        ArrayA[0] = "01";
+        break;
+      case "Feb":
+        ArrayA[0] = "02";
+        break;
+      case "Mar":
+        ArrayA[0] = "03";
+        break;
+      case "Apr":
+        ArrayA[0] = "04";
+        break;
+      case "May":
+        ArrayA[0] = "05";
+        break;
+      case "Jun":
+        ArrayA[0] = "06";
+        break;
+      case "Jul":
+        ArrayA[0] = "07";
+        break;
+      case "Aug":
+        ArrayA[0] = "08";
+        break;
+      case "Sep":
+        ArrayA[0] = "09";
+        break;
+      case "Oct":
+        ArrayA[0] = "10";
+        break;
+      case "Nov":
+        ArrayA[0] = "11";
+        break;
+      case "Dec":
+        ArrayA[0] = "12";
+        break;
+      default:
+        return;
     }
-    if (a.date > b.date) {
+    ArrayA = ArrayA.join(' ')
+    let ArrayB = b.date.split(' ').splice(1,4)
+    switch (ArrayB[0]) {
+      case "Jan":
+        ArrayB[0] = "01";
+        break;
+      case "Feb":
+        ArrayB[0] = "02";
+        break;
+      case "Mar":
+        ArrayB[0] = "03";
+        break;
+      case "Apr":
+        ArrayB[0] = "04";
+        break;
+      case "May":
+        ArrayB[0] = "05";
+        break;
+      case "Jun":
+        ArrayB[0] = "06";
+        break;
+      case "Jul":
+        ArrayB[0] = "07";
+        break;
+      case "Aug":
+        ArrayB[0] = "08";
+        break;
+      case "Sep":
+        ArrayB[0] = "09";
+        break;
+      case "Oct":
+        ArrayB[0] = "10";
+        break;
+      case "Nov":
+        ArrayB[0] = "11";
+        break;
+      case "Dec":
+        ArrayB[0] = "12";
+        break;
+      default:
+        return;
+    }
+    ArrayB = ArrayB.join(' ')
+    console.log(parseInt(ArrayB))
+    if (ArrayA < ArrayB) {
       // console.log(emails[1].subject);
       return 1;
+    }
+    if (ArrayA > ArrayB) {
+      // console.log(emails[1].subject);
+      return -1;
     }
     return 0;
   }
