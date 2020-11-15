@@ -126,9 +126,63 @@ function App() {
     }
   }
 
-  // function covertTonewDate(props) {
-  //   return new Date(props);
-  // }
+  function convertToYYYMMDD(props) {
+    props = props.split(" ").splice(1, 3);
+    switchCases(props);
+    props.splice(3);
+    const newProps = ["YYYY", "/", "MM", "/", "DD"];
+    newProps[0] = props[2];
+    newProps[2] = props[0];
+    newProps[4] = props[1];
+    return newProps.join("");
+  }
+
+  function switchCases(monthArray) {
+    switch (monthArray[0]) {
+      case "Jan":
+        monthArray[0] = "01";
+        break;
+      case "Feb":
+        monthArray[0] = "02";
+        break;
+      case "Mar":
+        monthArray[0] = "03";
+        break;
+      case "Apr":
+        monthArray[0] = "04";
+        break;
+      case "May":
+        monthArray[0] = "05";
+        break;
+      case "Jun":
+        monthArray[0] = "06";
+        break;
+      case "Jul":
+        monthArray[0] = "07";
+        break;
+      case "Aug":
+        monthArray[0] = "08";
+        break;
+      case "Sep":
+        monthArray[0] = "09";
+        break;
+      case "Oct":
+        monthArray[0] = "10";
+        break;
+      case "Nov":
+        monthArray[0] = "11";
+        break;
+      case "Dec":
+        monthArray[0] = "12";
+        break;
+      default:
+        return;
+    }
+  }
+
+  function covertTonewDate(props) {
+    return new Date(props);
+  }
 
   // date functions
   // let fakeTime = "Fri Nov 13 2020 09:28:14 GMT+0900 (Japan Standard Time)";
@@ -339,10 +393,10 @@ function App() {
     setCalander(e.target.value);
   };
 
-  // function openEmail (email) {
-  //   console.log(email)
-  // }
-
+  function openEmail (email) {
+    console.log(email)
+  }
+  
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
       <ol className={styles.EmailOL} key={Math.random()}>
