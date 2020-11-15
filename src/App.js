@@ -341,7 +341,7 @@ function App() {
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()}>
+      <ol className={styles.EmailOL} key={Math.random()} onClick={() => console.log('Correct!')}>
         <div className={styles.flex}>
           <img className={styles.emailimg} src={emailimg} />
           <div className={styles.emailResultCon}>
