@@ -45,87 +45,11 @@ function App() {
   }
   function compareDate(a, b) {
     let ArrayA = a.date.split(" ").splice(1, 4);
-    switch (ArrayA[0]) {
-      case "Jan":
-        ArrayA[0] = "01";
-        break;
-      case "Feb":
-        ArrayA[0] = "02";
-        break;
-      case "Mar":
-        ArrayA[0] = "03";
-        break;
-      case "Apr":
-        ArrayA[0] = "04";
-        break;
-      case "May":
-        ArrayA[0] = "05";
-        break;
-      case "Jun":
-        ArrayA[0] = "06";
-        break;
-      case "Jul":
-        ArrayA[0] = "07";
-        break;
-      case "Aug":
-        ArrayA[0] = "08";
-        break;
-      case "Sep":
-        ArrayA[0] = "09";
-        break;
-      case "Oct":
-        ArrayA[0] = "10";
-        break;
-      case "Nov":
-        ArrayA[0] = "11";
-        break;
-      case "Dec":
-        ArrayA[0] = "12";
-        break;
-      default:
-        return;
-    }
+    switchCases(ArrayA);
+
     let ArrayB = b.date.split(" ").splice(1, 4);
-    switch (ArrayB[0]) {
-      case "Jan":
-        ArrayB[0] = "01";
-        break;
-      case "Feb":
-        ArrayB[0] = "02";
-        break;
-      case "Mar":
-        ArrayB[0] = "03";
-        break;
-      case "Apr":
-        ArrayB[0] = "04";
-        break;
-      case "May":
-        ArrayB[0] = "05";
-        break;
-      case "Jun":
-        ArrayB[0] = "06";
-        break;
-      case "Jul":
-        ArrayB[0] = "07";
-        break;
-      case "Aug":
-        ArrayB[0] = "08";
-        break;
-      case "Sep":
-        ArrayB[0] = "09";
-        break;
-      case "Oct":
-        ArrayB[0] = "10";
-        break;
-      case "Nov":
-        ArrayB[0] = "11";
-        break;
-      case "Dec":
-        ArrayB[0] = "12";
-        break;
-      default:
-        return;
-    }
+    switchCases(ArrayB);
+
     let y = ["YYYY", "/", "MM", "/", "DD"];
     y[0] = ArrayA[2];
     y[2] = ArrayA[0];
@@ -134,8 +58,8 @@ function App() {
     x[0] = ArrayB[2];
     x[2] = ArrayB[0];
     x[4] = ArrayB[1];
-    x=x.join('')
-    y = y.join('')
+    x = x.join("");
+    y = y.join("");
     console.log(x);
     if (y < x) {
       // console.log(emails[1].subject);
@@ -437,7 +361,7 @@ function App() {
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
             <li className={styles.DateCol} key={Math.random()}>
-            {calcDate(items.date)}
+              {calcDate(items.date)}
             </li>
           </div>
         </div>
