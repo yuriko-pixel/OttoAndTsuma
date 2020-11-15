@@ -140,63 +140,63 @@ function App() {
     return 0;
   }
 
-  function convertToYYYMMDD (props) {
-    props =  props.split(' ').splice(1,3)
-    switchCases(props)
-    props.splice(3)
-    const newProps = ['YYYY','/','MM','/','DD']
-    newProps[0] = props[2]
-    newProps[2] = props[0]
-    newProps[4] = props[1]
-    return newProps.join('')
-}
+  function convertToYYYMMDD(props) {
+    props = props.split(" ").splice(1, 3);
+    switchCases(props);
+    props.splice(3);
+    const newProps = ["YYYY", "/", "MM", "/", "DD"];
+    newProps[0] = props[2];
+    newProps[2] = props[0];
+    newProps[4] = props[1];
+    return newProps.join("");
+  }
 
-function switchCases (monthArray) {
+  function switchCases(monthArray) {
     switch (monthArray[0]) {
-        case "Jan":
-          monthArray[0] = "01";
-          break;
-        case "Feb":
-          monthArray[0] = "02";
-          break;
-        case "Mar":
-          monthArray[0] = "03";
-          break;
-        case "Apr":
-          monthArray[0] = "04";
-          break;
-        case "May":
-          monthArray[0] = "05";
-          break;
-        case "Jun":
-          monthArray[0] = "06";
-          break;
-        case "Jul":
-          monthArray[0] = "07";
-          break;
-        case "Aug":
-          monthArray[0] = "08";
-          break;
-        case "Sep":
-          monthArray[0] = "09";
-          break;
-        case "Oct":
-          monthArray[0] = "10";
-          break;
-        case "Nov":
-          monthArray[0] = "11";
-          break;
-        case "Dec":
-          monthArray[0] = "12";
-          break;
-        default:
-          return;
-      }
-}
+      case "Jan":
+        monthArray[0] = "01";
+        break;
+      case "Feb":
+        monthArray[0] = "02";
+        break;
+      case "Mar":
+        monthArray[0] = "03";
+        break;
+      case "Apr":
+        monthArray[0] = "04";
+        break;
+      case "May":
+        monthArray[0] = "05";
+        break;
+      case "Jun":
+        monthArray[0] = "06";
+        break;
+      case "Jul":
+        monthArray[0] = "07";
+        break;
+      case "Aug":
+        monthArray[0] = "08";
+        break;
+      case "Sep":
+        monthArray[0] = "09";
+        break;
+      case "Oct":
+        monthArray[0] = "10";
+        break;
+      case "Nov":
+        monthArray[0] = "11";
+        break;
+      case "Dec":
+        monthArray[0] = "12";
+        break;
+      default:
+        return;
+    }
+  }
 
-function covertTonewDate (props) {
-    return new Date(props)
-}
+  function covertTonewDate(props) {
+    return new Date(props);
+  }
 
   // date functions
   // let fakeTime = "Fri Nov 13 2020 09:28:14 GMT+0900 (Japan Standard Time)";
@@ -307,7 +307,6 @@ function covertTonewDate (props) {
   let changes = 0;
   // Search function to look for emails from the dates
 
-
   const CompareFrom = (emails) => {
     const newArr = emails.slice();
     newArr.sort(compareFrom);
@@ -338,17 +337,17 @@ function covertTonewDate (props) {
     for (let index = 0; index < allEmails.length; index++) {
       const WholeEmail = allEmails[index];
       const element = convertToYYYMMDD(allEmails[index].date);
-      const StartDate = calander.split(' ')[0]
-      const EndDate = calander.split(' ')[2]
-      if (element > StartDate && element < EndDate || element === EndDate) {
-          console.log('Match')
-          placeHolder.push(WholeEmail)
+      const StartDate = calander.split(" ")[0];
+      const EndDate = calander.split(" ")[2];
+      if ((element > StartDate && element < EndDate) || element === EndDate) {
+        console.log("Match");
+        placeHolder.push(WholeEmail);
       } else {
-        console.log('No Match')
+        console.log("No Match");
       }
     }
-    setEmails(placeHolder)
-}
+    setEmails(placeHolder);
+  };
   const [calander, setCalander] = useState("1900/11/14 - 2020/11/14");
   const updateCalander = (e) => {
     console.log(e.target.value);
@@ -357,41 +356,37 @@ function covertTonewDate (props) {
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key = {Math.random()}>
+      <ol className={styles.EmailOL} key={Math.random()}>
         <div className={styles.flex}>
-        <img className={styles.emailimg} src={emailimg}/>
-        <div className={styles.emailResultCon}>
-          <li
-            className={styles.FromCol}
-            key={Math.random()}
-            onClick={() => console.log(index)}
-          >
-            {items.from}
-          </li>
-          <li className={styles.ToCol} key={Math.random()}>
-            {items.to}
-          </li>
-          <li className={styles.MessageSum} key={Math.random()}>
-            
-          </li>
-          <li className={styles.SubCol} key={Math.random()}>
-            {items.subject}
-          </li>
-          <li className={styles.Attachment} key={Math.random()}>
-            
-          </li>
-          <li className={styles.DateCol} key={Math.random()}>
-            {items.date}
-          </li>
+          <img className={styles.emailimg} src={emailimg} />
+          <div className={styles.emailResultCon}>
+            <li
+              className={styles.FromCol}
+              key={Math.random()}
+              onClick={() => console.log(index)}
+            >
+              {items.from}
+            </li>
+            <li className={styles.ToCol} key={Math.random()}>
+              {items.to}
+            </li>
+            <li className={styles.MessageSum} key={Math.random()}></li>
+            <li className={styles.SubCol} key={Math.random()}>
+              {items.subject}
+            </li>
+            <li className={styles.Attachment} key={Math.random()}></li>
+            <li className={styles.DateCol} key={Math.random()}>
+              {items.date}
+            </li>
+          </div>
         </div>
-      </div>
-    </ol>
+      </ol>
     ));
     return (
-      <ul key = {Math.random()}>
-        <ol className={styles.EmailTitles} id="emailTitles" key = {Math.random()} >
+      <ul key={Math.random()}>
+        <ol className={styles.EmailTitles} id="emailTitles" key={Math.random()}>
           <li
-            key = {Math.random()}
+            key={Math.random()}
             className={styles.FromWidth}
             id="title"
             onClick={() => setEmails(CompareFrom(emails))}
@@ -399,32 +394,28 @@ function covertTonewDate (props) {
             From
           </li>
           <li
-         key = {Math.random()}
+            key={Math.random()}
             className={styles.ToWidth}
             id="title"
-            onClick={() => setEmails(emails.sort(compareTo))}
+            onClick={() => setEmails(CompareTo(emails))}
           >
             To
           </li>
-          <li className={styles.MessageSum} key={Math.random()}>
-          
-        </li>
+          <li className={styles.MessageSum} key={Math.random()}></li>
           <li
-          key = {Math.random()}
+            key={Math.random()}
             className={styles.SubWidth}
             id="title"
-            onClick={() => setEmails(emails.sort(compareSubject))}
+            onClick={() => setEmails(CompareSubect(emails))}
           >
             Subject
           </li>
-          <li className={styles.Attachment} key={Math.random()}>
-          </li>
+          <li className={styles.Attachment} key={Math.random()}></li>
           <li
-          key = {Math.random()}
-            className={styles.DateWidth
-            }
+            key={Math.random()}
+            className={styles.DateWidth}
             id="title"
-            onClick={() => console.log("Date")}
+            onClick={() => setEmails(CompareDate(emails))}
           >
             Date
           </li>
@@ -432,7 +423,7 @@ function covertTonewDate (props) {
         {listEmails}
       </ul>
     );
-  };
+  }
   // Make a list of emails
   if (emails.length > 0) {
     return (
@@ -442,10 +433,20 @@ function covertTonewDate (props) {
             {/* reaplce input with calander input */}
             <div>
               {" "}
-              {/* <Calendar onChange={onChange} value={value} /> */}
+              <input
+                className="search-bar"
+                type="text"
+                value={calander}
+                onChange={updateCalander}
+              />
             </div>
             <button className={styles.Search_Container}>
-              <img className={styles.Search} src={Search} alt="Search" type="submit" />
+              <img
+                className={styles.Search}
+                src={Search}
+                alt="Search"
+                type="submit"
+              />
             </button>
           </form>
           {/* Search end */}
@@ -470,7 +471,25 @@ function covertTonewDate (props) {
       <div className={styles.App}>
         <div className={styles.Dates}>
           <div className={styles.Calendar}>
-            <p>Calender</p>
+            <form onSubmit={SearchClick} className="search-form">
+              <div>
+                {" "}
+                <input
+                  className="search-bar"
+                  type="text"
+                  value={calander}
+                  onChange={updateCalander}
+                />
+              </div>
+              <button className="Search-Container">
+                <img
+                  className="Search"
+                  src={Search}
+                  alt="Search"
+                  type="submit"
+                />
+              </button>
+            </form>
           </div>
           {/* Calender end */}
           <div className={styles.Search}>
