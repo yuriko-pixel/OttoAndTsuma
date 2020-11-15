@@ -126,63 +126,7 @@ function App() {
     }
   }
 
-  function convertToYYYMMDD(props) {
-    props = props.split(" ").splice(1, 3);
-    switchCases(props);
-    props.splice(3);
-    const newProps = ["YYYY", "/", "MM", "/", "DD"];
-    newProps[0] = props[2];
-    newProps[2] = props[0];
-    newProps[4] = props[1];
-    return newProps.join("");
-  }
-
-  function switchCases(monthArray) {
-    switch (monthArray[0]) {
-      case "Jan":
-        monthArray[0] = "01";
-        break;
-      case "Feb":
-        monthArray[0] = "02";
-        break;
-      case "Mar":
-        monthArray[0] = "03";
-        break;
-      case "Apr":
-        monthArray[0] = "04";
-        break;
-      case "May":
-        monthArray[0] = "05";
-        break;
-      case "Jun":
-        monthArray[0] = "06";
-        break;
-      case "Jul":
-        monthArray[0] = "07";
-        break;
-      case "Aug":
-        monthArray[0] = "08";
-        break;
-      case "Sep":
-        monthArray[0] = "09";
-        break;
-      case "Oct":
-        monthArray[0] = "10";
-        break;
-      case "Nov":
-        monthArray[0] = "11";
-        break;
-      case "Dec":
-        monthArray[0] = "12";
-        break;
-      default:
-        return;
-    }
-  }
-
-  function covertTonewDate(props) {
-    return new Date(props);
-  }
+  
 
   // date functions
   // let fakeTime = "Fri Nov 13 2020 09:28:14 GMT+0900 (Japan Standard Time)";
@@ -399,10 +343,10 @@ function App() {
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()} onClick={() => openEmail(items)}>
+      <ol className={styles.EmailOL} key={Math.random()}>
         <div className={styles.flexFix}>
           <div className={styles.flex}>
-            <img className={styles.emailimg} src={emailimg} />
+            <img className={styles.emailimg} src={emailimg} alt=""/>
               <div className={styles.flexFix}>
                 <div className={styles.flex}>
                   <li
@@ -424,6 +368,7 @@ function App() {
               {items.subject}
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
+            
         </div>
         <li className={styles.DateCol} key={Math.random()}>
               {calcDate(items.date)}
@@ -479,10 +424,11 @@ function App() {
         <div className={styles.Date}>
           <form onSubmit={SearchClick} className={styles.search_form}>
             {/* reaplce input with calander input */}
+            <div className={styles.flexSearch}>
             <div>
               {" "}
               <input
-                className="search-bar"
+                className={styles.search_bar}
                 type="text"
                 value={calander}
                 onChange={updateCalander}
@@ -496,6 +442,7 @@ function App() {
                 type="submit"
               />
             </button>
+            </div>
           </form>
           {/* Search end */}
         </div>
@@ -520,23 +467,25 @@ function App() {
         <div className={styles.Dates}>
           <div className={styles.Calendar}>
             <form onSubmit={SearchClick} className="search-form">
-              <div>
-                {" "}
-                <input
-                  className="search-bar"
-                  type="text"
-                  value={calander}
-                  onChange={updateCalander}
-                />
+              <div className={styles.flex}>
+                <div>
+                  {" "}
+                  <input
+                    className="search-bar"
+                    type="text"
+                    value={calander}
+                    onChange={updateCalander}
+                  />
+                </div>
+                <button className="Search-Container">
+                  <img
+                    className="Search"
+                    src={Search}
+                    alt="Search"
+                    type="submit"
+                  />
+                </button>
               </div>
-              <button className="Search-Container">
-                <img
-                  className="Search"
-                  src={Search}
-                  alt="Search"
-                  type="submit"
-                />
-              </button>
             </form>
           </div>
           {/* Calender end */}
