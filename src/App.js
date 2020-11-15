@@ -45,99 +45,85 @@ function App() {
   }
   function compareDate(a, b) {
     let ArrayA = a.date.split(" ").splice(1, 4);
-    switch (ArrayA[0]) {
-      case "Jan":
-        ArrayA[0] = "01";
-        break;
-      case "Feb":
-        ArrayA[0] = "02";
-        break;
-      case "Mar":
-        ArrayA[0] = "03";
-        break;
-      case "Apr":
-        ArrayA[0] = "04";
-        break;
-      case "May":
-        ArrayA[0] = "05";
-        break;
-      case "Jun":
-        ArrayA[0] = "06";
-        break;
-      case "Jul":
-        ArrayA[0] = "07";
-        break;
-      case "Aug":
-        ArrayA[0] = "08";
-        break;
-      case "Sep":
-        ArrayA[0] = "09";
-        break;
-      case "Oct":
-        ArrayA[0] = "10";
-        break;
-      case "Nov":
-        ArrayA[0] = "11";
-        break;
-      case "Dec":
-        ArrayA[0] = "12";
-        break;
-      default:
-        return;
-    }
-    ArrayA = ArrayA.join(" ");
+    switchCases(ArrayA);
+
     let ArrayB = b.date.split(" ").splice(1, 4);
-    switch (ArrayB[0]) {
-      case "Jan":
-        ArrayB[0] = "01";
-        break;
-      case "Feb":
-        ArrayB[0] = "02";
-        break;
-      case "Mar":
-        ArrayB[0] = "03";
-        break;
-      case "Apr":
-        ArrayB[0] = "04";
-        break;
-      case "May":
-        ArrayB[0] = "05";
-        break;
-      case "Jun":
-        ArrayB[0] = "06";
-        break;
-      case "Jul":
-        ArrayB[0] = "07";
-        break;
-      case "Aug":
-        ArrayB[0] = "08";
-        break;
-      case "Sep":
-        ArrayB[0] = "09";
-        break;
-      case "Oct":
-        ArrayB[0] = "10";
-        break;
-      case "Nov":
-        ArrayB[0] = "11";
-        break;
-      case "Dec":
-        ArrayB[0] = "12";
-        break;
-      default:
-        return;
-    }
-    ArrayB = ArrayB.join(" ");
-    console.log(parseInt(ArrayB));
-    if (ArrayA < ArrayB) {
+    switchCases(ArrayB);
+
+    let y = ["YYYY", "/", "MM", "/", "DD"];
+    y[0] = ArrayA[2];
+    y[2] = ArrayA[0];
+    y[4] = ArrayA[1];
+    let x = ["YYYY", "/", "MM", "/", "DD"];
+    x[0] = ArrayB[2];
+    x[2] = ArrayB[0];
+    x[4] = ArrayB[1];
+    x = x.join("");
+    y = y.join("");
+    console.log(x);
+    if (y < x) {
       // console.log(emails[1].subject);
       return 1;
     }
-    if (ArrayA > ArrayB) {
+    if (y > x) {
       // console.log(emails[1].subject);
       return -1;
     }
     return 0;
+  }
+
+  function convertToYYYMMDD(props) {
+    props = props.split(" ").splice(1, 3);
+    switchCases(props);
+    props.splice(3);
+    const newProps = ["YYYY", "/", "MM", "/", "DD"];
+    newProps[0] = props[2];
+    newProps[2] = props[0];
+    newProps[4] = props[1];
+    return newProps.join("");
+  }
+
+  function switchCases(monthArray) {
+    switch (monthArray[0]) {
+      case "Jan":
+        monthArray[0] = "01";
+        break;
+      case "Feb":
+        monthArray[0] = "02";
+        break;
+      case "Mar":
+        monthArray[0] = "03";
+        break;
+      case "Apr":
+        monthArray[0] = "04";
+        break;
+      case "May":
+        monthArray[0] = "05";
+        break;
+      case "Jun":
+        monthArray[0] = "06";
+        break;
+      case "Jul":
+        monthArray[0] = "07";
+        break;
+      case "Aug":
+        monthArray[0] = "08";
+        break;
+      case "Sep":
+        monthArray[0] = "09";
+        break;
+      case "Oct":
+        monthArray[0] = "10";
+        break;
+      case "Nov":
+        monthArray[0] = "11";
+        break;
+      case "Dec":
+        monthArray[0] = "12";
+        break;
+      default:
+        return;
+    }
   }
 
   function convertToYYYMMDD(props) {
@@ -407,9 +393,13 @@ function App() {
     setCalander(e.target.value);
   };
 
+  function openEmail (email) {
+    console.log(email)
+  }
+
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()}>
+      <ol className={styles.EmailOL} key={Math.random()} onClick={() => openEmail(items)}>
         <div className={styles.flexFix}>
           <div className={styles.flex}>
             <img className={styles.emailimg} src={emailimg} />
@@ -434,7 +424,6 @@ function App() {
               {items.subject}
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
-            
         </div>
         <li className={styles.DateCol} key={Math.random()}>
               {calcDate(items.date)}
