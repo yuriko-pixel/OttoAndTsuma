@@ -126,6 +126,60 @@ function App() {
     }
   }
 
+  function convertToYYYMMDD(props) {
+    props = props.split(" ").splice(1, 3);
+    switchCases(props);
+    props.splice(3);
+    const newProps = ["YYYY", "/", "MM", "/", "DD"];
+    newProps[0] = props[2];
+    newProps[2] = props[0];
+    newProps[4] = props[1];
+    return newProps.join("");
+  }
+
+  function switchCases(monthArray) {
+    switch (monthArray[0]) {
+      case "Jan":
+        monthArray[0] = "01";
+        break;
+      case "Feb":
+        monthArray[0] = "02";
+        break;
+      case "Mar":
+        monthArray[0] = "03";
+        break;
+      case "Apr":
+        monthArray[0] = "04";
+        break;
+      case "May":
+        monthArray[0] = "05";
+        break;
+      case "Jun":
+        monthArray[0] = "06";
+        break;
+      case "Jul":
+        monthArray[0] = "07";
+        break;
+      case "Aug":
+        monthArray[0] = "08";
+        break;
+      case "Sep":
+        monthArray[0] = "09";
+        break;
+      case "Oct":
+        monthArray[0] = "10";
+        break;
+      case "Nov":
+        monthArray[0] = "11";
+        break;
+      case "Dec":
+        monthArray[0] = "12";
+        break;
+      default:
+        return;
+    }
+  }
+
   function covertTonewDate(props) {
     return new Date(props);
   }
@@ -346,29 +400,34 @@ function App() {
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
       <ol className={styles.EmailOL} key={Math.random()} onClick={() => openEmail(items)}>
-        <div className={styles.flex}>
-          <img className={styles.emailimg} src={emailimg} />
-          <div className={styles.emailResultCon}>
-            <li
-              className={styles.FromCol}
-              key={Math.random()}
-              onClick={() => console.log(index)}
-            >
-              {items.from}
-            </li>
-            <li className={styles.ToCol} key={Math.random()}>
-              {items.to}
-            </li>
+        <div className={styles.flexFix}>
+          <div className={styles.flex}>
+            <img className={styles.emailimg} src={emailimg} />
+              <div className={styles.flexFix}>
+                <div className={styles.flex}>
+                  <li
+                    className={styles.FromCol}
+                    key={Math.random()}
+                    onClick={() => console.log(index)}
+                  >
+                    {items.from}
+                  </li>
+                  <li className={styles.dateDisp}>{calcDate(items.date)}</li>
+                </div>
+                <li className={styles.ToCol} key={Math.random()}>
+                  {items.to}
+                </li>
+              </div>
+          </div>
             <li className={styles.MessageSum} key={Math.random()}></li>
             <li className={styles.SubCol} key={Math.random()}>
               {items.subject}
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
-            <li className={styles.DateCol} key={Math.random()}>
+        </div>
+        <li className={styles.DateCol} key={Math.random()}>
               {calcDate(items.date)}
             </li>
-          </div>
-        </div>
       </ol>
     ));
     return (
