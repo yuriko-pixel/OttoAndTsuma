@@ -126,7 +126,6 @@ function App() {
     }
   }
 
-
   function covertTonewDate(props) {
     return new Date(props);
   }
@@ -346,10 +345,11 @@ function App() {
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()} onClick={() => openEmail(items)}>
+      <ol className={styles.EmailOL} key={Math.random()}>
         <div className={styles.flexFix}>
           <div className={styles.flex}>
             <img className={styles.emailimg} src={emailimg} alt='email icon' />
+
               <div className={styles.flexFix}>
                 <div className={styles.flex}>
                   <li
@@ -371,6 +371,7 @@ function App() {
               {items.subject}
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
+            
         </div>
         <li className={styles.DateCol} key={Math.random()}>
               {calcDate(items.date)}
@@ -426,10 +427,11 @@ function App() {
         <div className={styles.Date}>
           <form onSubmit={SearchClick} className={styles.search_form}>
             {/* reaplce input with calander input */}
+            <div className={styles.flexSearch}>
             <div>
               {" "}
               <input
-                className="search-bar"
+                className={styles.search_bar}
                 type="text"
                 value={calander}
                 onChange={updateCalander}
@@ -443,6 +445,7 @@ function App() {
                 type="submit"
               />
             </button>
+            </div>
           </form>
           {/* Search end */}
         </div>
@@ -467,23 +470,25 @@ function App() {
         <div className={styles.Dates}>
           <div className={styles.Calendar}>
             <form onSubmit={SearchClick} className="search-form">
-              <div>
-                {" "}
-                <input
-                  className="search-bar"
-                  type="text"
-                  value={calander}
-                  onChange={updateCalander}
-                />
+              <div className={styles.flex}>
+                <div>
+                  {" "}
+                  <input
+                    className="search-bar"
+                    type="text"
+                    value={calander}
+                    onChange={updateCalander}
+                  />
+                </div>
+                <button className="Search-Container">
+                  <img
+                    className="Search"
+                    src={Search}
+                    alt="Search"
+                    type="submit"
+                  />
+                </button>
               </div>
-              <button className="Search-Container">
-                <img
-                  className="Search"
-                  src={Search}
-                  alt="Search"
-                  type="submit"
-                />
-              </button>
             </form>
           </div>
           {/* Calender end */}
