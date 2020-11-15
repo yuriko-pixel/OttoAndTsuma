@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+
+.flex {
+  display: flex;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;
+  color:black;
+}
+
+.App {
+  text-align: center;
+  width: 98vw;
+  height: 98vh;
+  margin: 1vh;
+}
+
+@media(max-width:1500px) {
+
+  .emailimg{
+    display: none;
+  }
+  
+.Resultscon {
+  vertical-align: super; 
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.resultslen {
+  vertical-align: super; 
+  font-size: 25px;
+ font-weight: 900;
+}
+
+.EmailContainer{
+  font-family: 'Roboto', sans-serif;
+  margin: 0 40px 100px 40px;
+}
+
+.Dates {
+  justify-content: first baseline;
+  align-items: center;
+  }
+  
+  /* results */
+  .Results {
+    // display: flex;
+    justify-content: first baseline;
+    align-items: center;
+  }
+  
+  /* No-email container */
+  .NoEmails {
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* When there is emails how to arrange them */
+  .Emails {
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  /* Each individual email */
+  .Email {
+    border-bottom: 1px solid grey;
+    // display: flex;
+    // flex-wrap: wrap;
+    // flex-direction: row;
+    direction: ltr;
+    width: 100%;
+    // justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .EmailTitles {
+    border-bottom: 1px solid #c7c7c7;
+    border-top: 1px solid #c7c7c7;
+    padding: 10px 0;
+    font-weight: bold;
+    display: -webkit-box;
+    // display: flex;
+    // flex-direction: row;
+    direction: ltr;
+    width: 100%;
+    background-color: #e7e7e7;
+  }
+
+  #emailTitles:hover {
+    background-color: #fbfbfb;
+    color: black;
+    cursor: default;
+  }
+
+  .Title{
+    width: 100px;
+  }
+
+  .FromWidth,FromCol {
+    width: 180px;
+    margin-left: 10px;
+    text-align: left;
+  }
+
+  .ToWidth,ToCol {
+    width: 330px;
+    text-align: left;
+  }
+
+  .SubWidth,SubCol {
+    width: 420px;
+    text-align: left;
+  }
+
+  .Attachment{
+    width:50px;
+  }
+  .DateWidth,DateDol {
+    width: 100px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  #title:hover{ 
+    background-color: orange;
+    color: green;
+    cursor: pointer;
+  }
+  
+  .Search_Container {
+    width: 30px;
+    padding: 2px;
+    border: 1px solid red;
+    background-color: lightgrey;
+  }
+
+  li {
+    padding: 8px;
+    font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: black;
+  }
+  
+  ul {
+    width: 100%;
+    list-style: none;
+    
+    margin: 0px;
+    padding: 0;
+  }
+
+  ol {
+    list-style: none;
+    border-bottom: 1px solid #c7c7c7;
+    width: 100%;
+    display: -webkit-box;
+      // justify-content: space-around;
+  }
+  
+  ol:hover {
+   color: rgb(15, 15, 255);
+   background-color: rgb(235, 235, 235);
+   cursor: pointer;
+  }
+}
+  @media(max-width:428px) {
+
+    .EmailTitles {
+      padding: 10px 0 10px 15px;
+    }
+
+    .EmailContainer{
+      margin: 0;
+    }
+
+    .emailimg{
+      display: inline;
+      width: 18px;
+      margin-left: 20px;
+    }
+
+    .FromWidth {
+      width: auto;
+      margin-top: 10px;
+      padding: 0 10px 0 0;
+      height: 20px;
+      margin-left: 5px;
+      border-right: solid 1px #878787;
+    }
+
+    .FromCol {
+      width: 200px;
+    }
+
+    .ToWidth {
+      width: auto;
+      height: 20px;
+      padding: 0 10px 0 0;
+      margin: 10px 0 10px 10px;
+      border-right: solid 1px #878787;
+    }
+
+    .SubWidth {
+      width: auto;     
+      height: 20px;
+      padding: 0 10px 0 0;
+      margin: 10px 0 10px 10px;
+      border-right: solid 1px #878787;
+    }
+
+    .MessageSum,.Attachment{
+      width: 0;
+      height:0;
+      margin:0;
+      padding:0;
+    }
+    .Attachment{
+      width:auto;
+    }
+
+    .DateWidth {
+      width: auto;
+      height: 20px;
+      padding: 0 10px 0 0;
+      margin: 10px 10px;
+      border-right: solid 1px #878787;
+    }
+
+    ol {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 5px;
+  }
+}

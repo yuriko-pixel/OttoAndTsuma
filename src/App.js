@@ -2,7 +2,8 @@ import "./App.css";
 import NoEmails from "./images/logo.png";
 import Search from "./images/icon_search.svg";
 import React, { useState, useEffect } from "react";
-// import Calendar from "react-calendar";
+import styles from "./styles/main.module.scss";
+import emailimg from "./images/icon_mail_sp.svg";
 
 function App() {
   // compare the from and put them in order
@@ -356,57 +357,74 @@ function covertTonewDate (props) {
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className="EmailOL" key={Math.random()}>
-        <li
-          className="Email"
-          key={Math.random()}
-          onClick={() => console.log(index)}
-        >
-          {items.from}
-        </li>
-        <li className="Email" key={Math.random()}>
-          {items.to}
-        </li>
-        <li className="Email" key={Math.random()}>
-          {items.subject}
-        </li>
-        <li className="Email" key={Math.random()}>
-          {calcDate(items.date)}
-        </li>
-      </ol>
+      <ol className={styles.EmailOL} key = {Math.random()}>
+        <div className={styles.flex}>
+        <img className={styles.emailimg} src={emailimg}/>
+        <div className={styles.emailResultCon}>
+          <li
+            className={styles.FromCol}
+            key={Math.random()}
+            onClick={() => console.log(index)}
+          >
+            {items.from}
+          </li>
+          <li className={styles.ToCol} key={Math.random()}>
+            {items.to}
+          </li>
+          <li className={styles.MessageSum} key={Math.random()}>
+            
+          </li>
+          <li className={styles.SubCol} key={Math.random()}>
+            {items.subject}
+          </li>
+          <li className={styles.Attachment} key={Math.random()}>
+            
+          </li>
+          <li className={styles.DateCol} key={Math.random()}>
+            {items.date}
+          </li>
+        </div>
+      </div>
+    </ol>
     ));
     return (
-      <ul key={Math.random()}>
-        <ol className="EmailTitles" id="emailTitles" key={Math.random()}>
+      <ul key = {Math.random()}>
+        <ol className={styles.EmailTitles} id="emailTitles" key = {Math.random()} >
           <li
-            key={Math.random()}
-            className="Title"
+            key = {Math.random()}
+            className={styles.FromWidth}
             id="title"
             onClick={() => setEmails(CompareFrom(emails))}
           >
             From
           </li>
           <li
-            key={Math.random()}
-            className="Title"
+         key = {Math.random()}
+            className={styles.ToWidth}
             id="title"
-            onClick={() => setEmails(CompareTo(emails))}
+            onClick={() => setEmails(emails.sort(compareTo))}
           >
             To
           </li>
+          <li className={styles.MessageSum} key={Math.random()}>
+          
+        </li>
           <li
-            key={Math.random()}
-            className="Title"
+          key = {Math.random()}
+            className={styles.SubWidth}
             id="title"
-            onClick={() => setEmails(CompareSubect(emails))}
+            onClick={() => setEmails(emails.sort(compareSubject))}
           >
             Subject
           </li>
+          <li className={styles.Attachment} key={Math.random()}>
+          </li>
           <li
-            key={Math.random()}
-            className="Title"
+          key = {Math.random()}
+            className={styles.DateWidth
+            }
             id="title"
-            onClick={() => setEmails(CompareDate(emails))}
+            onClick={() => console.log("Date")}
           >
             Date
           </li>
@@ -414,67 +432,59 @@ function covertTonewDate (props) {
         {listEmails}
       </ul>
     );
-  }
+  };
   // Make a list of emails
   if (emails.length > 0) {
     return (
-      <div className="App">
-        <div className="Dates">
-          <form onSubmit={SearchClick} className="search-form">
+      <div className={styles.App}>
+        <div className={styles.Date}>
+          <form onSubmit={SearchClick} className={styles.search_form}>
             {/* reaplce input with calander input */}
             <div>
               {" "}
               {/* <Calendar onChange={onChange} value={value} /> */}
-              <input
-                className="search-bar"
-                type="text"
-                value={calander}
-                onChange={updateCalander}
-              />
             </div>
-            <button className="Search-Container">
-              <img className="Search" src={Search} alt="Search" type="submit" />
+            <button className={styles.Search_Container}>
+              <img className={styles.Search} src={Search} alt="Search" type="submit" />
             </button>
           </form>
           {/* Search end */}
         </div>
         {/* Dates end */}
-        <div className="Results">
-          <p>Results: {resultsLength}mail(s)</p>
-        </div>
-        {/* Results end */}
-        <div className="Emails">
-          <MessagesList value={emails} />
+        <div className={styles.EmailContainer}>
+          <div className={styles.Resultscon}>
+            <div className={styles.results}>Results: </div>
+            <div className={styles.resultslen}>{resultsLength}</div>
+            <div className={styles.mailslen}>mail(s)</div>
+          </div>
+          {/* Results end */}
+          <div className={styles.Emails}>
+            <MessagesList value={emails} />
+          </div>
         </div>
         {/* Emails end */}
       </div>
     );
   } else {
     return (
-      <div className="App">
-        <div className="Dates">
-          <form onSubmit={SearchClick} className="search-form">
-            {/* reaplce input with calander input */}
-            <div>
-              {" "}
-              {/* <Calendar onChange={onChange} value={value} /> */}
-              <input
-                className="search-bar"
-                type="text"
-                value={calander}
-                onChange={updateCalander}
-              />
-            </div>
-            <button className="Search-Container">
-              <img className="Search" src={Search} alt="Search" type="submit" />
-            </button>
-          </form>
-          {/* Dates end */}
+      <div className={styles.App}>
+        <div className={styles.Dates}>
+          <div className={styles.Calendar}>
+            <p>Calender</p>
+          </div>
+          {/* Calender end */}
+          <div className={styles.Search}>
+            <p>Search</p>
+          </div>
+          {/* Search end */}
+        </div>
+        {/* Dates end */}
+        <div className={styles.Results}>
           <p>Results: {resultsLength}mail(s)</p>
         </div>
         {/* Results end */}
-        <div className="NoEmails">
-          <img className="EmailImage" src={NoEmails} alt="No-Emails" />
+        <div className={styles.NoEmails}>
+          <img className={styles.EmailImage} src={NoEmails} alt="No-Emails" />
         </div>
         {/* Emails end */}
       </div>
