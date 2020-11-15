@@ -276,26 +276,79 @@ function App() {
     {
       from: "aaa@exmaple.com",
       to: "zzz@example.com",
-      subject: "Second Email",
+      subject: "Fourth Email",
       date: "Sun Nov 01 2020 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
     },
     {
       from: "aaa@exmaple.com",
       to: "zzz@example.com",
       subject: "Second Email",
       date: "Sun Nov 14 2020 02:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
     },
     {
       from: "ddd@exmaple.com",
       to: "eee@example.com",
       subject: "Third Email",
       date: "Sat Nov 07 2020 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
     },
     {
       from: "bbb@exmaple.com",
       to: "ccc@example.com",
       subject: "First Email",
       date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
+    },
+    {
+      from: "HarryPotter@exmaple.com",
+      to: "RonWeasley@example.com",
+      subject: "Gingers monthly has a picture of you!",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: true,
+    },
+    {
+      from: "HermioneGranger@exmaple.com",
+      to: "RonWeasley@example.com",
+      subject: "Do you remeber our first date?",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
+    },
+    {
+      from: "Hagrid@exmaple.com",
+      to: "All@example.com",
+      subject: "Please stop drawing faces on all the pumpkins.",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
+    },
+    {
+      from: "Dumbledore@exmaple.com",
+      to: "HarryPotter@example.com",
+      subject: "Guess whos back!",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: true,
+    },
+    {
+      from: "GinnyWeasley@exmaple.com",
+      to: "RonWeasley@example.com",
+      subject: "Have you seen my shoes?",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
+    },
+    {
+      from: "LunaLovegood@exmaple.com",
+      to: "GinnyWeasley@example.com",
+      subject: "The Quibbler, 50% off!",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: true,
+    },
+    {
+      from: "DracoMalfoy@exmaple.com",
+      to: "HarryPotter@example.com",
+      subject: "Pub?",
+      date: "Wed Aug 08 2018 00:00:00 GMT+0900 (Japan Standard Time)",
+      attachment: false,
     },
   ];
   // Set the emails to be the incoming inital state
@@ -376,7 +429,7 @@ function App() {
             </li>
             <li className={styles.Attachment} key={Math.random()}></li>
             <li className={styles.DateCol} key={Math.random()}>
-              {items.date}
+            {calcDate(items.date)}
             </li>
           </div>
         </div>
