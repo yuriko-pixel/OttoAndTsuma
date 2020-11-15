@@ -339,9 +339,13 @@ function App() {
     setCalander(e.target.value);
   };
 
+  function openEmail (email) {
+    console.log(email)
+  }
+
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()} onClick={() => console.log('Correct!')}>
+      <ol className={styles.EmailOL} key={Math.random()} onClick={() => openEmail(items)}>
         <div className={styles.flex}>
           <img className={styles.emailimg} src={emailimg} />
           <div className={styles.emailResultCon}>
