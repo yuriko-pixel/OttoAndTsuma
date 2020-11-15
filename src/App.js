@@ -85,7 +85,6 @@ function App() {
       default:
         return;
     }
-    ArrayA = ArrayA.join(" ");
     let ArrayB = b.date.split(" ").splice(1, 4);
     switch (ArrayB[0]) {
       case "Jan":
@@ -127,13 +126,22 @@ function App() {
       default:
         return;
     }
-    ArrayB = ArrayB.join(" ");
-    console.log(parseInt(ArrayB));
-    if (ArrayA < ArrayB) {
+    let y = ["YYYY", "/", "MM", "/", "DD"];
+    y[0] = ArrayA[2];
+    y[2] = ArrayA[0];
+    y[4] = ArrayA[1];
+    let x = ["YYYY", "/", "MM", "/", "DD"];
+    x[0] = ArrayB[2];
+    x[2] = ArrayB[0];
+    x[4] = ArrayB[1];
+    x=x.join('')
+    y = y.join('')
+    console.log(x);
+    if (y < x) {
       // console.log(emails[1].subject);
       return 1;
     }
-    if (ArrayA > ArrayB) {
+    if (y > x) {
       // console.log(emails[1].subject);
       return -1;
     }
