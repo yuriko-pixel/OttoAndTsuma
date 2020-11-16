@@ -4,6 +4,7 @@ import Search from "./images/icon_search.svg";
 import React, { useState, useEffect } from "react";
 import styles from "./styles/main.module.scss";
 import emailimg from "./images/icon_mail_sp.svg";
+import EmailContent from "./components/email";
 
 function App() {
   // compare the from and put them in order
@@ -338,44 +339,55 @@ function App() {
     console.log(e.target.value);
     setCalander(e.target.value);
   };
-
-  function openEmail (email) {
-    console.log(email)
+  const [isEmail, setIsEmail] = useState(false);
+  const [content, setConetent] = useState({
+    from: "aaa@exmaple.com",
+    to: "zzz@example.com",
+    subject: "Fourth Email",
+    date: "Sun Nov 01 2020 00:00:00 GMT+0900 (Japan Standard Time)",
+    attachment: false,
+  });
+  function openEmail(email) {
+    setConetent(email);
+    setIsEmail(true);
   }
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()}>
+      <ol
+        className={styles.EmailOL}
+        key={Math.random()}
+        onClick={() => openEmail(items)}
+      >
         <div className={styles.flexFix}>
           <div className={styles.flex}>
-            <img className={styles.emailimg} src={emailimg} alt='email icon' />
+            <img className={styles.emailimg} src={emailimg} alt="email icon" />
 
-              <div className={styles.flexFix}>
-                <div className={styles.flex}>
-                  <li
-                    className={styles.FromCol}
-                    key={Math.random()}
-                    onClick={() => console.log(index)}
-                  >
-                    {items.from}
-                  </li>
-                  <li className={styles.dateDisp}>{calcDate(items.date)}</li>
-                </div>
-                <li className={styles.ToCol} key={Math.random()}>
-                  {items.to}
+            <div className={styles.flexFix}>
+              <div className={styles.flex}>
+                <li
+                  className={styles.FromCol}
+                  key={Math.random()}
+                  onClick={() => console.log(index)}
+                >
+                  {items.from}
                 </li>
+                <li className={styles.dateDisp}>{calcDate(items.date)}</li>
               </div>
+              <li className={styles.ToCol} key={Math.random()}>
+                {items.to}
+              </li>
+            </div>
           </div>
-            <li className={styles.MessageSum} key={Math.random()}></li>
-            <li className={styles.SubCol} key={Math.random()}>
-              {items.subject}
-            </li>
-            <li className={styles.Attachment} key={Math.random()}></li>
-            
+          <li className={styles.MessageSum} key={Math.random()}></li>
+          <li className={styles.SubCol} key={Math.random()}>
+            {items.subject}
+          </li>
+          <li className={styles.Attachment} key={Math.random()}></li>
         </div>
         <li className={styles.DateCol} key={Math.random()}>
-              {calcDate(items.date)}
-            </li>
+          {calcDate(items.date)}
+        </li>
       </ol>
     ));
     return (
@@ -421,30 +433,30 @@ function App() {
     );
   }
   // Make a list of emails
-  if (emails.length > 0) {
+  if (emails.length > 0 && !isEmail) {
     return (
       <div className={styles.App}>
         <div className={styles.Date}>
           <form onSubmit={SearchClick} className={styles.search_form}>
             {/* reaplce input with calander input */}
             <div className={styles.flexSearch}>
-            <div>
-              {" "}
-              <input
-                className={styles.search_bar}
-                type="text"
-                value={calander}
-                onChange={updateCalander}
-              />
-            </div>
-            <button className={styles.Search_Container}>
-              <img
-                className={styles.Search}
-                src={Search}
-                alt="Search"
-                type="submit"
-              />
-            </button>
+              <div>
+                {" "}
+                <input
+                  className={styles.search_bar}
+                  type="text"
+                  value={calander}
+                  onChange={updateCalander}
+                />
+              </div>
+              <button className={styles.Search_Container}>
+                <img
+                  className={styles.Search}
+                  src={Search}
+                  alt="Search"
+                  type="submit"
+                />
+              </button>
             </div>
           </form>
           {/* Search end */}
@@ -464,6 +476,8 @@ function App() {
         {/* Emails end */}
       </div>
     );
+  } else if (isEmail) {
+    return (<EmailContent email={content} func={setIsEmail} />);
   } else {
     return (
       <div className={styles.App}>
