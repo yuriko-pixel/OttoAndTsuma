@@ -4,6 +4,8 @@ import Search from "./images/icon_search.svg";
 import React, { useState, useEffect } from "react";
 import styles from "./styles/main.module.scss";
 import emailimg from "./images/icon_mail_sp.svg";
+import EmailContent from "./components/email";
+import triangleimg from "./images/icon_arrow01.svg"
 
 function App() {
   // compare the from and put them in order
@@ -126,7 +128,9 @@ function App() {
     }
   }
 
-  // 
+  function covertTonewDate(props) {
+    return new Date(props);
+  }
 
   // date functions
   // let fakeTime = "Fri Nov 13 2020 09:28:14 GMT+0900 (Japan Standard Time)";
@@ -289,26 +293,123 @@ function App() {
   let resultsLength = emails.length;
   let changes = 0;
   // Search function to look for emails from the dates
+  const [triangle, setTriangle] = useState(
+    [
+      {"triangle":"none"},
+      {
+        "from": "up",
+        "to": "up",
+        "subject":"up",
+        "date":"up"
+      }
+    ]
+  );
+  
+  const changeTriangle = (props) => {
+    switch(props) {
+      case "from":
+        const change = triangle.slice();
+        change[0].triangle = "from";
+        change[1].from = change[1].from === "up"? "down": "up";
+        setTriangle(change);
+        console.log(change[1].from);
+        break;
+      case "to":
+          const change1 = triangle.slice();
+          change1[0].triangle = "to";
+          change1[1].to = change1[1].to === "up"? "down": "up";
+          setTriangle(change1);
+          console.log(change1[1].to);
+          break;
+      case "subject":
+          const change2 = triangle.slice();
+          change2[0].triangle = "subject";
+          change2[1].subject = change2[1].subject === "up"? "down": "up";
+          setTriangle(change2);
+          console.log(change2[1].subject);
+          break;
+      case "date":
+          const change3 = triangle.slice();
+          change3[0].triangle = "date";
+          change3[1].date = change3[1].date === "up"? "down": "up";
+          setTriangle(change3);
+          console.log(change3[1].date);
+          break;
+    }
+  }
+
+  const fromTriangle = ()=> {
+    if(triangle[0].triangle === "from" && triangle[1].from === "down") {
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleDown}/>
+      )
+    } else if(triangle[0].triangle === "from" && triangle[1].from === "up"){
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleUp}/>
+      )
+    }
+  }
+
+  const toTriangle = ()=> {
+    if(triangle[0].triangle === "to" && triangle[1].to === "down") {
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleDown}/>
+      )
+    }else if(triangle[0].triangle === "to" && triangle[1].to === "up"){
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleUp}/>
+      )
+    }
+  }
+
+  const subTriangle = ()=> {
+    if(triangle[0].triangle === "subject" && triangle[1].subject === "down") {
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleDown}/>
+      )
+    }else if(triangle[0].triangle === "subject" && triangle[1].subject === "up"){
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleUp}/>
+      )
+    }
+  }
+
+  function dateTriangle(){
+    if(triangle[0].triangle === "date" && triangle[1].date === "down") {
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleDown}/>
+      )
+    }else if(triangle[0].triangle === "date" && triangle[1].date === "up"){
+      return (
+        <img src={triangleimg} alt="" className={styles.TriangleUp}/>
+      )
+    }
+  }
+
 
   const CompareFrom = (emails) => {
+    changeTriangle("from");
     const newArr = emails.slice();
     newArr.sort(compareFrom);
     // console.log(newArr === emails);
     return newArr;
   };
   const CompareTo = (emails) => {
+    changeTriangle("to");
     const newArr = emails.slice();
     newArr.sort(compareTo);
     // console.log(newArr === emails);
     return newArr;
   };
   const CompareSubect = (emails) => {
+    changeTriangle("subject");
     const newArr = emails.slice();
     newArr.sort(compareSubject);
     // console.log(newArr === emails);
     return newArr;
   };
   const CompareDate = (emails) => {
+    changeTriangle("date");
     const newArr = emails.slice();
     newArr.sort(compareDate);
     // console.log(newArr === emails);
@@ -336,43 +437,55 @@ function App() {
     console.log(e.target.value);
     setCalander(e.target.value);
   };
-
-  function openEmail (email) {
-    console.log(email)
+  const [isEmail, setIsEmail] = useState(false);
+  const [content, setConetent] = useState({
+    from: "aaa@exmaple.com",
+    to: "zzz@example.com",
+    subject: "Fourth Email",
+    date: "Sun Nov 01 2020 00:00:00 GMT+0900 (Japan Standard Time)",
+    attachment: false,
+  });
+  function openEmail(email) {
+    setConetent(email);
+    setIsEmail(true);
   }
 
   function MessagesList({ value }) {
     let listEmails = value.map((items, index) => (
-      <ol className={styles.EmailOL} key={Math.random()}>
+      <ol
+        className={styles.EmailOL}
+        key={Math.random()}
+        onClick={() => openEmail(items)}
+      >
         <div className={styles.flexFix}>
           <div className={styles.flex}>
-            <img className={styles.emailimg} src={emailimg} alt=""/>
-              <div className={styles.flexFix}>
-                <div className={styles.flex}>
-                  <li
-                    className={styles.FromCol}
-                    key={Math.random()}
-                    onClick={() => console.log(index)}
-                  >
-                    {items.from}
-                  </li>
-                  <li className={styles.dateDisp}>{calcDate(items.date)}</li>
-                </div>
-                <li className={styles.ToCol} key={Math.random()}>
-                  {items.to}
+            <img className={styles.emailimg} src={emailimg} alt="email icon" />
+
+            <div className={styles.flexFix}>
+              <div className={styles.flex}>
+                <li
+                  className={styles.FromCol}
+                  key={Math.random()}
+                  onClick={() => console.log(index)}
+                >
+                  {items.from}
                 </li>
+                <li className={styles.dateDisp}>{calcDate(items.date)}</li>
               </div>
+              <li className={styles.ToCol} key={Math.random()}>
+                {items.to}
+              </li>
+            </div>
           </div>
-            <li className={styles.MessageSum} key={Math.random()}></li>
-            <li className={styles.SubCol} key={Math.random()}>
-              {items.subject}
-            </li>
-            <li className={styles.Attachment} key={Math.random()}></li>
-            
+          <li className={styles.MessageSum} key={Math.random()}></li>
+          <li className={styles.SubCol} key={Math.random()}>
+            {items.subject}
+          </li>
+          <li className={styles.Attachment} key={Math.random()}></li>
         </div>
         <li className={styles.DateCol} key={Math.random()}>
-              {calcDate(items.date)}
-            </li>
+          {calcDate(items.date)}
+        </li>
       </ol>
     ));
     return (
@@ -386,6 +499,8 @@ function App() {
           >
             From
           </li>
+          {fromTriangle()}
+          <div className={styles.borderStyle} ></div>
           <li
             key={Math.random()}
             className={styles.ToWidth}
@@ -394,6 +509,8 @@ function App() {
           >
             To
           </li>
+          {toTriangle()}
+          <div className={styles.borderStyle} ></div>
           <li className={styles.MessageSum} key={Math.random()}></li>
           <li
             key={Math.random()}
@@ -403,6 +520,8 @@ function App() {
           >
             Subject
           </li>
+          {subTriangle()}
+          <div className={styles.borderStyle} ></div>
           <li className={styles.Attachment} key={Math.random()}></li>
           <li
             key={Math.random()}
@@ -412,36 +531,38 @@ function App() {
           >
             Date
           </li>
+          {dateTriangle()}
+          <div className={styles.borderStyle} ></div>
         </ol>
         {listEmails}
       </ul>
     );
   }
   // Make a list of emails
-  if (emails.length > 0) {
+  if (emails.length > 0 && !isEmail) {
     return (
       <div className={styles.App}>
         <div className={styles.Date}>
           <form onSubmit={SearchClick} className={styles.search_form}>
             {/* reaplce input with calander input */}
             <div className={styles.flexSearch}>
-            <div>
-              {" "}
-              <input
-                className={styles.search_bar}
-                type="text"
-                value={calander}
-                onChange={updateCalander}
-              />
-            </div>
-            <button className={styles.Search_Container}>
-              <img
-                className={styles.Search}
-                src={Search}
-                alt="Search"
-                type="submit"
-              />
-            </button>
+              <div>
+                {" "}
+                <input
+                  className={styles.search_bar}
+                  type="text"
+                  value={calander}
+                  onChange={updateCalander}
+                />
+              </div>
+              <button className={styles.Search_Container}>
+                <img
+                  className={styles.Search}
+                  src={Search}
+                  alt="Search"
+                  type="submit"
+                />
+              </button>
             </div>
           </form>
           {/* Search end */}
@@ -461,6 +582,8 @@ function App() {
         {/* Emails end */}
       </div>
     );
+  } else if (isEmail) {
+    return (<EmailContent email={content} func={setIsEmail} />);
   } else {
     return (
       <div className={styles.App}>
